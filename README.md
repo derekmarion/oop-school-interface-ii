@@ -2,7 +2,7 @@
 
 ## Release 0: Menu
 
-Let's think about our program from the users point of view for a moment. The first thing we want them to see is a menu that lists actions they can take. 
+Let's think about our program from the user's point of view for a moment. The first thing we want them to see when the program starts is a menu that lists all the actions they can take. 
 
 ```
 What would you like to do?
@@ -25,7 +25,7 @@ Replace the lines that are printing out the `staff` and `student` variables with
     puts "\nWhat would you like to do?\nOptions:\n1. List All Students\n2. View Individual Student <student_id>\n3. Add a Student\n4. Remove a Student <student_id>\n5. Quit"
 
 ```
-The above code might look strange, but when we run it we'll find that our menu prints out just the way we want it to. The `\n` tells ruby to start a new line. Creating a UI for the command line is not the most intuitive thing to do with Ruby. We'll be using a few of these string tricks to help us out as we go. 
+The above code might look strange, but when we run it we'll find that our menu prints out just the way we want it to. The `\n` in the string tells ruby to start a new line.  
 
 Right now we have a program that prints a menu and then exits. That's not very useful. We want to give the user the option to select one of the menu items. We can do that using `gets.chomp`. 
 
@@ -38,11 +38,11 @@ Right now we have a program that prints a menu and then exits. That's not very u
 
 ```
 
-We are going to have our user choose options with a number. If they enter `1` we'll list all students, if they enter `2` they can view a specific student's info etc. We'll worry about error handling later. 
+We are going to have our user choose options by their number. If they enter `1` we'll list all students, if they enter `2` they can view a specific student's info etc. We'll worry about error handling later. 
 
-Let's make another design deciision here. We could handle user input with a serious of if statments. That would be perfectly valid. But there's another type of conditional in `Ruby` called a [case statment](http://www.rubyguides.com/2015/10/ruby-case/) that will work nicely for us here. 
+Let's make another design decision here. We could handle user input with a series of if statements. That would be perfectly valid. But there's another type of conditional in `Ruby` called a [case statment](http://www.rubyguides.com/2015/10/ruby-case/) that will work nicely for us here. 
 
-If this makes you nervous feel free to just use an if statement, but we'll go ahead with a case statement here. We'll build it out as we go. Let's just start with what happens when `mode == '1'`
+If this makes you nervous feel free to just use an if statement, but we'll go ahead with a case statement for now. We'll build it out as we go. Let's just start with what happens when `mode == '1'`
 
 ```Ruby
 #runner.rb 
@@ -85,13 +85,15 @@ else
     return 
 end  
 ```
-After the user chooses to view a student, they'll have to enter a student id so we have a way to look up the student. This is better than searching by name because ideally each student will have a unique id where as there could be several students named "Tom" or even "Tom Smith". 
+After the user chooses to view a student, they'll have to enter a student id so we have a way to look up the student. This is better than searching by name because there can be several students with the same name, but ideally each student will have a unique id. 
 
 We could save the result of `gets.chomp` to a variable, but since that variable is going to go directly into our method, we can skip it here and just call `gets.chomp` as our argument. 
 
+Again if we run this and choose `'2'` we will get an error because we haven't written the method yet. 
+
 In `school.rb` define a method `find_student_by_id` that takes in an id and returns the student with the matching id. If it doesn't find anything it returns nil. 
 
-When you're done you should be able to run `ruby runner.rb`, enter '2' and have the student object print out in the terminal. It'll look ugly, but we'll handle that in the next release. 
+When you're done you should be able to run `ruby runner.rb`, enter `'2'` and have the student object print out in the terminal. It'll look ugly, but we'll handle that in the next release. 
 
 ## Release 2: The to_s Method
 
@@ -119,5 +121,5 @@ id: 13345
 
 ## Release 3: Quit
 
-Great. We've implemented two or our features. One problem we can fix before we're done for today is the fact that our program quits out after one action. We want the user to be able to view multiple students in a session. How can we use a loop to include this functionality? 
+We've implemented two of or our features. One problem we can fix before we're done for today is the fact that our program quits out after one action. We want the user to be able to view multiple students in a session. How can we use a loop to include this functionality? Add code to `runner.rb` so that after showing the list of students or the data from a single student, the menu displays again and the user can input another selection. Only when the user inputs a `'5'` should the program exit. 
 
