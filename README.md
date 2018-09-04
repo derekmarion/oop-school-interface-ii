@@ -59,7 +59,7 @@ If this makes you nervous feel free to just use an if statement, but we'll go ah
 ```
 Right now if the user enters a `'1'` our program will run the the `list_students` method on our school object. Any other input will return and exit the program. Run `ruby runner.rb` and enter `'1'`. You'll get an error. What does it say? 
 
-In `school.rb` write a method `list_students` that prints out a numbered list of student names followed by their school_ids. You're output should look something like this: 
+In `school.rb` write a method `list_students` that prints out a numbered list of student names followed by their school_ids. Your output should look something like this: 
 
 ```
 1. Lisa 13345
@@ -101,16 +101,7 @@ You may have noticed that we've been using `puts` to print output instead of `p`
 
 `to_s` is a `Ruby` method that converts an object into a string. It literally stands for 'to string'. Some objects have a `to_s` method defined already. For objects we make ourselves (like our student class) we can define our own `to_s` method that will automatically get called when we use `puts`. 
 
-Let's do that for our student class now. 
-
-```Ruby
-def to_s
-    "\n#{name.upcase}\n---------------\nage: #{age}\nid: #{school_id}\n"
-end
-```
-Our student class doesn't really have much going on right now, but you can see that if we wanted to add more info (address, phone number, dob etc) we'd want it all to print out in a way that was easily readable. 
-
-Now run `ruby runner.rb` and select '2'. The output should look something like this. 
+Write a `to_s` method in the student class that prints the instance of student object in a more readable way. 
 
 ```
 LISA
