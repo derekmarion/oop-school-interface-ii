@@ -8,7 +8,7 @@ Let's think about our program from the user's point of view for a moment. The fi
 What would you like to do?
 Options:
     1. List All Students
-    2. View Individual  Student <student_id>
+    2. View Individual Student <student_id>
     3. Add a Student
     4. Remove a Student <student_id>
     5. Quit
@@ -19,47 +19,43 @@ We'll start by putting this logic in our runner file. We can always pull it out 
 
 Replace the lines that are printing out the `staff` and `student` variables with this code for the menu. 
 
-```Ruby
-#runner.rb 
-
-    puts "\nWhat would you like to do?\nOptions:\n1. List All Students\n2. View Individual Student <student_id>\n3. Add a Student\n4. Remove a Student <student_id>\n5. Quit"
-
-```
-The above code might look strange, but when we run it we'll find that our menu prints out just the way we want it to. The `\n` in the string tells ruby to start a new line.  
-
-Right now we have a program that prints a menu and then exits. That's not very useful. We want to give the user the option to select one of the menu items. We can do that using `gets.chomp`. 
-
-```Ruby
-#runner.rb 
-
-    puts "\nWhat would you like to do?\nOptions:\n1. List All Students\n2. View Individual Student <student_id>\n3. Add a Student\n4. Remove a Student <student_id>\n5. Quit"
-
-    mode = gets.chomp 
+```Python
+#runner.py
+print("\nWhat would you like to do?\nOptions:\n1. List All Students\n2. View Individual Student <student_id>\n3. Add a Student\n4. Remove a Student <student_id>\n5. Quit\n")
 
 ```
+The above code might look strange, but when we run it we'll find that our menu prints out just the way we want it to. The `\n` in the string tells Python to start a new line.  
 
-We are going to have our user choose options by their number. If they enter `1` we'll list all students, if they enter `2` they can view a specific student's info etc. We'll worry about error handling later. 
+Right now we have a program that prints a menu and then exits. That's not very useful. We want to give the user the option to select one of the menu items. We can do that using `input()`. 
 
-Let's make another design decision here. We could handle user input with a series of if statements. That would be perfectly valid. But there's another type of conditional in `Ruby` called a [case statment](http://www.rubyguides.com/2015/10/ruby-case/) that will work nicely for us here. 
+```Python
+#runner.py 
 
-If this makes you nervous feel free to just use an if statement, but we'll go ahead with a case statement for now. We'll build it out as we go. Let's just start with what happens when `mode == '1'`
+mode = input("\nWhat would you like to do?\nOptions:\n1. List All Students\n2. View Individual Student <student_id>\n3. Add a Student\n4. Remove a Student <student_id>\n5. Quit\n")
 
-```Ruby
-#runner.rb 
+print(mode)
 
-    mode = gets.chomp 
-    # throwing this puts in here just to give us a space to keep things a little clearer 
-    puts '' 
-    case mode 
-    when '1'
-        school.list_students
-    else 
-        return 
-    end  
 ```
-Right now if the user enters a `'1'` our program will run the the `list_students` method on our school object. Any other input will return and exit the program. Run `ruby runner.rb` and enter `'1'`. You'll get an error. What does it say? 
 
-In `school.rb` write a method `list_students` that prints out a numbered list of student names followed by their school_ids. Your output should look something like this: 
+We are going to have our user choose options by their number. If they enter `1` we'll list all students, if they enter `2` they can view a specific student's info, etc. We'll worry about error handling later. 
+
+```Python
+#runner.py 
+from classes.school import School 
+
+school = School('Ridgemont High') 
+
+mode = input("\nWhat would you like to do?\nOptions:\n1. List All Students\n2. View Individual Student <student_id>\n3. Add a Student\n4. Remove a Student <student_id>\n5. Quit\n")
+
+if mode == '1':
+  school.list_students() 
+else:
+  pass 
+
+```
+Right now if the user enters a `'1'` our program will run the the `list_students()` method on our school object. Any other input will return and exit the program. Run `python3 runner.py` and enter `'1'`. You'll get an error. What does it say? 
+
+In `school.py` write a method `list_students` that prints out a numbered list of student names followed by their school_ids. Your output should look something like this: 
 
 ```
 1. Lisa 13345
@@ -74,34 +70,29 @@ In `school.rb` write a method `list_students` that prints out a numbered list of
 
 Next let's give the user the ability to see data about a single student. First, we'll update our case statement. 
 
-```Ruby
-case mode 
-when '1'
-    school.list_students
-when '2'
-    puts 'Enter student id:'
-    puts school.find_student_by_id(gets.chomp) 
-else 
-    return 
-end  
+```Python
+if mode == '1':
+  school.list_students()
+elif mode == '2':
+  student_id = input('Enter student id:')
+  student = school.find_student_by_id(student_id)
+  print(str(student))
+else:
+  pass 
 ```
 After the user chooses to view a student, they'll have to enter a student id so we have a way to look up the student. This is better than searching by name because there can be several students with the same name, but ideally each student will have a unique id. 
 
-We could save the result of `gets.chomp` to a variable, but since that variable is going to go directly into our method, we can skip it here and just call `gets.chomp` as our argument. 
-
 Again if we run this and choose `'2'` we will get an error because we haven't written the method yet. 
 
-In `school.rb` define a method `find_student_by_id` that takes in an id and returns the student with the matching id. If it doesn't find anything it returns nil. 
+In `school.py` define a method `find_student_by_id()` that takes in an id and returns the student with the matching id. 
 
-When you're done you should be able to run `ruby runner.rb`, enter `'2'` and have the student object print out in the terminal. It'll look ugly, but we'll handle that in the next release. 
+When you're done you should be able to run `python3 runner.py`, enter `'2'`, enter a student id, and have the student object print out in the terminal. It'll look ugly, but we'll handle that in the next release. 
 
 ## Release 2: The to_s Method
 
-You may have noticed that we've been using `puts` to print output instead of `p`. `puts` does two things for us that `p` does not. First, it calls `to_s` on what we pass it (if that object has a `to_s` method defined). It also adds an extra line at the end, which helps us keep our output clean. [Read more about puts, p, and print here.](https://www.garethrees.co.uk/2013/05/04/p-vs-puts-vs-print-in-ruby/)
+`str()` is a `Python` method that converts an object into a string. Some objects have a `str()` method defined already. For objects we make ourselves (like our student class) we can define our own `str()` method that to control how an object gets printed out. 
 
-`to_s` is a `Ruby` method that converts an object into a string. It literally stands for 'to string'. Some objects have a `to_s` method defined already. For objects we make ourselves (like our student class) we can define our own `to_s` method that will automatically get called when we use `puts`. 
-
-Write a `to_s` method in the student class that prints the instance of student object in a more readable way. 
+Write a `str()` method (`def __str__(self):`) in the student class that prints the instance of student object in a more readable way. 
 
 ```
 LISA
@@ -112,5 +103,4 @@ id: 13345
 
 ## Release 3: Quit
 
-We've implemented two of or our features. One problem we can fix before we're done for today is the fact that our program quits out after one action. We want the user to be able to view multiple students in a session. How can we use a loop to include this functionality? Add code to `runner.rb` so that after showing the list of students or the data from a single student, the menu displays again and the user can input another selection. Only when the user inputs a `'5'` should the program exit. 
-
+We've implemented two of or our features. One problem we can fix before we're done for today is the fact that our program quits out after one action. We want the user to be able to view multiple students in a session. How can we use a loop to include this functionality? Add code to `runner.py` so that after showing the list of students or the data from a single student, the menu displays again and the user can input another selection. Only when the user inputs a `'5'` should the program exit. 
