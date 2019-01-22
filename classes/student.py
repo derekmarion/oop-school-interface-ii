@@ -4,7 +4,8 @@ from classes.person import Person
 
 class Student(Person):
 
-  def __init__(self, school_id):
+  def __init__(self, name, age, password, role, school_id):
+    super().__init__(name, age, password, role)
     self.school_id = school_id
 
   @classmethod
@@ -16,7 +17,7 @@ class Student(Person):
     with open(path) as csvfile:
       reader = csv.DictReader(csvfile)
       for row in reader:
-        students.append(Student(dict(row)))
+        students.append(Student(**dict(row)))
     
     return students
 

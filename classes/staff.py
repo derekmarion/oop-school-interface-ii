@@ -4,7 +4,8 @@ from classes.person import Person
 
 class Staff(Person):
   
-  def __init__(self, staff_id):
+  def __init__(self, name, age, password, role, staff_id):
+    super().__init__(name, age, password, role)
     self.staff_id = staff_id
 
   @classmethod
@@ -16,7 +17,7 @@ class Staff(Person):
     with open(path) as csvfile:
       reader = csv.DictReader(csvfile)
       for row in reader:
-        staff.append(Staff(dict(row)))
+        staff.append(Staff(**dict(row)))
 
     return staff
 
