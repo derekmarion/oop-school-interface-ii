@@ -4,9 +4,9 @@ from classes.person import Person
 
 class Staff(Person):
   
-  def __init__(self, name, age, password, role, staff_id):
+  def __init__(self, name, age, password, role, employee_id):
     super().__init__(name, age, password, role)
-    self.staff_id = staff_id
+    self.employee_id = employee_id
 
   @classmethod
   def objects(cls):
