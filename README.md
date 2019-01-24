@@ -88,7 +88,7 @@ In `school.py` define a method `find_student_by_id()` that takes in an id and re
 
 When you're done you should be able to run `python3 runner.py`, enter `'2'`, enter a student id, and have the student object print out in the terminal. It'll look ugly, but we'll handle that in the next release. 
 
-## Release 2: The to_s Method
+## Release 2: The str() Method
 
 `str()` is a `Python` method that converts an object into a string. Some objects have a `str()` method defined already. For objects we make ourselves (like our student class) we can define our own `str()` method that to control how an object gets printed out. 
 
