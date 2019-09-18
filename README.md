@@ -48,9 +48,9 @@ school = School('Ridgemont High')
 mode = input("\nWhat would you like to do?\nOptions:\n1. List All Students\n2. View Individual Student <student_id>\n3. Add a Student\n4. Remove a Student <student_id>\n5. Quit\n")
 
 if mode == '1':
-  school.list_students() 
+    school.list_students() 
 else:
-  pass 
+    pass 
 
 ```
 Right now if the user enters a `'1'` our program will run the the `list_students()` method on our school object. Any other input will return and exit the program. Run `python3 runner.py` and enter `'1'`. You'll get an error. What does it say? 
@@ -72,13 +72,13 @@ Next let's give the user the ability to see data about a single student. First, 
 
 ```Python
 if mode == '1':
-  school.list_students()
+    school.list_students()
 elif mode == '2':
-  student_id = input('Enter student id:')
-  student = school.find_student_by_id(student_id)
-  print(str(student))
+    student_id = input('Enter student id:')
+    student = school.find_student_by_id(student_id)
+    print(str(student))
 else:
-  pass 
+    pass 
 ```
 After the user chooses to view a student, they'll have to enter a student id so we have a way to look up the student. This is better than searching by name because there can be several students with the same name, but ideally each student will have a unique id. 
 
