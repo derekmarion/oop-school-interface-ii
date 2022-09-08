@@ -1,6 +1,6 @@
 # School Interface II
 
-## Release 0: Menu
+## Step 1: Menu
 
 Let's think about our program from the user's point of view for a moment. The first thing we want them to see when the program starts is a menu that lists all the actions they can take. 
 
@@ -66,7 +66,7 @@ In `school.py` write a method `list_students` that prints out a numbered list of
 6. doug 0809890
 ```
 
-## Release 1: View Single Student 
+## Step 2: View Single Student 
 
 Next let's give the user the ability to see data about a single student. First, we'll update our case statement. 
 
@@ -88,7 +88,7 @@ In `school.py` define a method `find_student_by_id()` that takes in an id and re
 
 When you're done you should be able to run `python3 runner.py`, enter `'2'`, enter a student id, and have the student object print out in the terminal. It'll look ugly, but we'll handle that in the next release. 
 
-## Release 2: The str() Method
+## Step 3: The str() Method
 
 `str()` is a `Python` method that converts an object into a string. Some objects have a `str()` method defined already. For objects we make ourselves (like our student class) we can define our own `str()` method that to control how an object gets printed out. 
 
@@ -101,6 +101,6 @@ age: 25
 id: 13345
 ```
 
-## Release 3: Quit
+## Step 4: Quit
 
 We've implemented two of or our features. One problem we can fix before we're done for today is the fact that our program quits out after one action. We want the user to be able to view multiple students in a session. How can we use a loop to include this functionality? Add code to `runner.py` so that after showing the list of students or the data from a single student, the menu displays again and the user can input another selection. Only when the user inputs a `'5'` should the program exit. 
